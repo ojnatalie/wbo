@@ -146,7 +146,7 @@ nav .nav-cta:hover { background: var(--sage); transform: translateY(-1px); }
 .story-tile .st-readmore { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--light); letter-spacing: 0.05em; margin-top: 16px; transition: color 0.3s; }
 .story-tile:hover .st-readmore { color: #fff; }
 .story-tile .st-author { display: flex; align-items: center; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); }
-.story-tile .st-author-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--sage), #3A6C5F); display: flex; align-items: center; justify-content: center; font-family: 'Libre Baskerville', serif; font-size: 12px; color: var(--white); flex-shrink: 0; }
+.story-tile .st-author-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--sage), #3A6C5F); display: flex; align-items: center; justify-content: center; font-family: 'Libre Baskerville', serif; font-size: 12px; color: var(--white); flex-shrink: 0; overflow: hidden; }
 .story-tile .st-author-name { font-size: 13px; font-weight: 600; color: var(--white); }
 .story-tile .st-author-role { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 1px; }
 .story-tile .st-author-role--link { text-decoration: none; display: block; transition: color 0.3s; }
@@ -503,34 +503,62 @@ footer a:hover { color: var(--dark); }
 </footer>
 
 <script>
+/*
+ * =============================================
+ *  STORIES — łatwa edycja historii uczestników
+ * =============================================
+ *  Aby dodać nową historię, skopiuj blok { ... }
+ *  i uzupełnij pola:
+ *
+ *  name      — imię i nazwisko (lub pseudonim)
+ *  initials  — inicjały (fallback gdy brak avatara)
+ *  role      — tekst pod imieniem (np. "Profil LinkedIn")
+ *  linkedIn  — URL do profilu LinkedIn (lub "#" jeśli brak)
+ *  quote     — cytat / fragment historii na kafelku
+ *  tag       — hashtag (zostawiaj "#wszyscybyliśmyopen")
+ *
+ *  ★ storyUrl — LINK DO PODSTRONY z pełną historią
+ *               np. "historia-mk.html"
+ *               ustaw "#" jeśli podstrona jeszcze nie istnieje
+ *
+ *  ★ avatar   — ŚCIEŻKA DO ZDJĘCIA AVATARA
+ *               np. "img/MK-img.png"
+ *               ustaw "" żeby wyświetlić inicjały zamiast zdjęcia
+ *
+ *  empty      — ustaw true TYLKO dla ostatniego kafelka "Twoja historia"
+ * =============================================
+ */
 const STORIES = [
   {
-    name:"Micha\u0142 Kruchelski",
+    name:    "Michał Kruchelski",
     initials:"MK",
-    role:"Profil LinkedIn",
+    role:    "Profil LinkedIn",
     linkedIn:"https://www.linkedin.com/in/micha%C5%82-kruchelski/",
-    quote:'Szczerze? Ba\u0142em si\u0119. Przez chwil\u0119 siedzia\u0142em z palcem nad "opublikuj" i my\u015Bla\u0142em: co pomy\u015Bl\u0105 znajomi, byli szefowie, rekruterzy, kt\u00F3rzy mnie obserwuj\u0105? \u017Be sobie nie poradzi\u0142em? \u017Be si\u0119 \u017Cal\u0119? \u017Be powinienem sam to ogarni\u0105\u0107 po cichu? Napisanie wprost "szukam pracy i potrzebuj\u0119 wsparcia" idzie pod pr\u0105d temu, jak wi\u0119kszo\u015B\u0107 z nas funkcjonuje zawodowo. Ale klikn\u0105\u0142em.',
-    tag:"#wszyscybyli\u015Bmyopen",
-    slug:"michal-kruchelski"
+    quote:   'Szczerze? Bałem się. Przez chwilę siedziałem z palcem nad "opublikuj" i myślałem: co pomyślą znajomi, byli szefowie, rekruterzy, którzy mnie obserwują? Że sobie nie poradziłem? Że się żalę? Że powinienem sam to ogarnąć po cichu? Napisanie wprost "szukam pracy i potrzebuję wsparcia" idzie pod prąd temu, jak większość z nas funkcjonuje zawodowo. Ale kliknąłem.',
+    tag:     "#wszyscybyliśmyopen",
+    storyUrl:"historia-mk.html",        // ★ zmień na właściwy plik podstrony
+    avatar:  "img/MK-img.png"            // ★ zmień na właściwą ścieżkę do avatara
   },
   {
-    name:"Agnieszka K.",
+    name:    "Agnieszka K.",
     initials:"AK",
-    role:"Profil LinkedIn",
+    role:    "Profil LinkedIn",
     linkedIn:"#",
-    quote:"Tu pojawi si\u0119 historia Agnieszki \u2014 jej do\u015Bwiadczenie, jej s\u0142owa, jej odwaga. Ka\u017Cda historia w tej akcji jest prawdziwa i publikowana za zgod\u0105 autora.",
-    tag:"#wszyscybyli\u015Bmyopen",
-    slug:"agnieszka-k"
+    quote:   "Tu pojawi się historia Agnieszki — jej doświadczenie, jej słowa, jej odwaga. Każda historia w tej akcji jest prawdziwa i publikowana za zgodą autora.",
+    tag:     "#wszyscybyliśmyopen",
+    storyUrl:"historia-ak.html",         // ★ zmień na właściwy plik podstrony
+    avatar:  ""                           // ★ zmień na ścieżkę do avatara (np. "img/AK-img.png")
   },
   {
-    name:"Twoja historia",
+    name:    "Twoja historia",
     initials:"+",
-    role:"",
+    role:    "",
     linkedIn:"",
-    quote:"To miejsce czeka na Ciebie. Wystarczy jeden wpis, jedno zdanie, jedna prawda.",
-    tag:"#wszyscybyli\u015Bmyopen",
-    slug:"",
-    empty:true
+    quote:   "To miejsce czeka na Ciebie. Wystarczy jeden wpis, jedno zdanie, jedna prawda.",
+    tag:     "#wszyscybyliśmyopen",
+    storyUrl:"",
+    avatar:  "",
+    empty:   true
   },
 ];
 
@@ -590,15 +618,19 @@ document.getElementById('stories-grid').innerHTML = STORIES.map((s, i) => {
       <div class="st-readmore" style="margin-top:16px">Podziel si\u0119 swoj\u0105 histori\u0105 \u2192</div>
     </a>`;
   }
-  const storyPage = s.slug ? `historia-${s.initials.toLowerCase()}.html` : '#';
+  const storyPage = s.storyUrl || '#';
   const linkedInUrl = s.linkedIn || '#';
+  // Avatar: jeśli s.avatar jest ustawiony — wyświetl img, w przeciwnym razie inicjały
+  const avatarContent = s.avatar
+    ? `<img src="${s.avatar}" alt="${s.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
+    : s.initials;
   return `<div class="fade-in story-tile">
     <div class="st-tag">${s.tag}</div>
     <div class="st-quote">${s.quote}</div>
     <a href="${storyPage}" class="st-readmore st-readmore--cta">Przeczytaj ca\u0142\u0105 histori\u0119 \u2192</a>
     <div class="st-author">
       <div class="st-author-avatar">
-        <img src="../wbo/img/MK-img.png" alt="Michał K." style="height: 100%">
+        ${avatarContent}
       </div>
       <div>
         <div class="st-author-name">${s.name}</div>
