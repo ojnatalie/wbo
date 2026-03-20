@@ -238,6 +238,24 @@ nav .nav-cta:hover { background: var(--sage); transform: translateY(-1px); }
 .friend-add-icon { width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 16px; background: rgba(0,51,40,0.06); display: flex; align-items: center; justify-content: center; transition: all 0.4s; }
 .friend-card--add:hover .friend-add-icon { background: var(--dark); }
 .friend-card--add:hover .friend-add-icon svg { stroke: var(--white); }
+
+/* Posts Preview */
+.posts-preview-scroll { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-top: 40px; }
+.posts-preview-card { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: var(--white); transition: all 0.4s; position: relative; }
+.posts-preview-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,51,40,0.1); border-color: var(--sage); }
+.posts-preview-card img { width: 100%; aspect-ratio: 1; display: block; object-fit: cover; }
+.posts-preview-card__overlay { position: absolute; inset: 0; background: rgba(0,51,40,0.0); display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+.posts-preview-card:hover .posts-preview-card__overlay { background: rgba(0,51,40,0.55); }
+.posts-preview-card__dl { opacity: 0; transform: translateY(6px); transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: var(--white); background: rgba(255,255,255,0.18); backdrop-filter: blur(6px); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.3); }
+.posts-preview-card:hover .posts-preview-card__dl { opacity: 1; transform: translateY(0); }
+.posts-preview-card__dl svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Inline link pills */
+.link-pill { display: inline-flex; align-items: center; gap: 4px; font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--sage); letter-spacing: 0.02em; padding: 3px 10px; border-radius: 100px; border: 1px solid var(--sage); transition: all 0.3s; margin-left: 4px; white-space: nowrap; text-decoration: none; vertical-align: baseline; }
+.link-pill:hover { background: var(--dark); color: var(--white); border-color: var(--dark); }
+.link-pill svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.link-pill--soon { color: var(--textL); border-color: var(--border); cursor: default; }
+.link-pill--soon:hover { background: var(--warm); color: var(--textL); border-color: var(--border); }
 .friend-add-icon svg { width: 24px; height: 24px; stroke: var(--sage); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.4s; }
 
 footer { padding: 40px 24px; border-top: 1px solid var(--border); text-align: center; background: var(--bg); }
@@ -272,10 +290,12 @@ footer a:hover { color: var(--dark); }
   .path-card--wide { flex-direction: column; gap: 20px; text-align: center; }
   .path-card--wide .path-cta { width: 100%; }
   .friends-grid { grid-template-columns: 1fr; }
+  .posts-preview-scroll { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
   .stories-grid { grid-template-columns: repeat(2, 1fr); }
   .friends-grid { grid-template-columns: repeat(2, 1fr); }
+  .posts-preview-scroll { grid-template-columns: repeat(3, 1fr); }
 }
 </style>
 </head>
@@ -471,12 +491,12 @@ footer a:hover { color: var(--dark); }
         <ul class="path-options">
           <li class="path-option">
             <div class="path-option-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div><strong>Udostępnij post o&nbsp;akcji</strong> na swoim profilu — powiększasz zasięg i&nbsp;dajesz szansę, że ktoś szukający zobaczy, że nie jest sam. <em style="color:var(--sage)"><a href="#" style="color:var(--sage)">(link do posta pojawi się wkrótce)</em></a></div>
+            <div><strong>Udostępnij post o&nbsp;akcji</strong> na swoim profilu — powiększasz zasięg i&nbsp;dajesz szansę, że ktoś szukający zobaczy, że nie jest sam. <span class="link-pill link-pill--soon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>link wkrótce</span></div>
           </li>
           <li class="path-or">lub</li>
           <li class="path-option">
             <div class="path-option-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div><strong>Skorzystaj z gotowych postów</strong> — przygotowałam szablony tekstów i&nbsp;grafik do opublikowania na Twoim profilu. Skopiuj, wklej, wyślij w&nbsp;świat.<a href="posty.html" style="color:var(--sage)">(zobacz gotowe posty)</em></a></div>
+            <div><strong>Skorzystaj z gotowych postów</strong> — przygotowałam szablony grafik do opublikowania na Twoim profilu. Pobierz, wklej, wyślij w&nbsp;świat. <a href="posty.html" class="link-pill"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>zobacz posty</a></div>
           </li>
           <li class="path-or">lub</li>
           <li class="path-option">
@@ -512,6 +532,33 @@ footer a:hover { color: var(--dark); }
       <h2 class="section-title">Co może się wydarzyć, gdy klikniesz „opublikuj”?</h2>
     </div>
     <div class="grid-2" id="outcomes"></div>
+  </div>
+</section>
+
+<!-- Gotowe posty — preview -->
+<section class="section" style="background:var(--warm)">
+  <div class="container--lg">
+    <div class="fade-in text-center" style="margin-bottom:8px">
+      <span class="label">Gotowe materiały</span>
+      <h2 class="section-title">Posty do udostępnienia</h2>
+      <p class="section-sub" style="max-width:520px">Nie musisz wymyślać treści. Pobierz gotową grafikę, opublikuj na swoim profilu i&nbsp;daj głos tym, którzy szukają po cichu.</p>
+    </div>
+    <div class="posts-preview-scroll">
+      <a href="posty.html" class="fade-in posts-preview-card"><img src="img/Post-1.png" alt="Wspieram ruch" loading="lazy"><div class="posts-preview-card__overlay"><span class="posts-preview-card__dl"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Pobierz</span></div></a>
+      <a href="posty.html" class="fade-in posts-preview-card"><img src="img/Post-2.png" alt="Też byłam open" loading="lazy"><div class="posts-preview-card__overlay"><span class="posts-preview-card__dl"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Pobierz</span></div></a>
+      <a href="posty.html" class="fade-in posts-preview-card"><img src="img/Post-3.png" alt="Też byłem open" loading="lazy"><div class="posts-preview-card__overlay"><span class="posts-preview-card__dl"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Pobierz</span></div></a>
+      <a href="posty.html" class="fade-in posts-preview-card"><img src="img/Post-4.png" alt="Zielona ramka" loading="lazy"><div class="posts-preview-card__overlay"><span class="posts-preview-card__dl"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Pobierz</span></div></a>
+      <a href="posty.html" class="fade-in posts-preview-card"><img src="img/Post-5.png" alt="Szukam. Głośno." loading="lazy"><div class="posts-preview-card__overlay"><span class="posts-preview-card__dl"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Pobierz</span></div></a>
+      <a href="posty.html" class="fade-in posts-preview-card"><img src="img/Post-6.png" alt="Manifest" loading="lazy"><div class="posts-preview-card__overlay"><span class="posts-preview-card__dl"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Pobierz</span></div></a>
+    </div>
+    <div class="fade-in text-center" style="margin-top:32px">
+      <a href="posty.html" class="btn-outline" style="font-size:14px;padding:12px 28px">
+        <span style="display:inline-flex;align-items:center;gap:6px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Zobacz wszystkie posty
+        </span>
+      </a>
+    </div>
   </div>
 </section>
 
