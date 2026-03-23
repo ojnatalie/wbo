@@ -174,10 +174,10 @@ const POSTS = [
 
 document.getElementById('grid').innerHTML = POSTS.map((p, i) => `
   <div class="fade-in post-card" style="transition-delay:${i * 0.06}s">
-    <img class="post-card__img" src="../wbo/img/${p.file}" alt="${p.label}" loading="lazy">
+    <img class="post-card__img" src="img/${p.file}" alt="${p.label}" loading="lazy">
     <div class="post-card__footer">
       <div class="post-card__label">${p.label}</div>
-      <a class="post-card__dl" href="../wbo/img/${p.file}" download="${p.file}">
+      <a class="post-card__dl" href="img/${p.file}" download="${p.file}">
         <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Pobierz
       </a>
